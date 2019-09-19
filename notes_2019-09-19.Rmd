@@ -1,0 +1,77 @@
+---
+title: "EDJM Analysis"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(here)
+library(pdftools)
+library(tidytext)
+```
+
+## Get files from EDJM
+
+```{r}
+myFiles <- dir(here("data/JEDM"),full.names = TRUE)
+myFiles
+```
+
+
+## See what is available
+
+```{r}
+# pdf_data(myFiles[1])
+# pdf_info(myFiles[1])
+# pdf_toc(myFiles[1])
+```
+
+Not really useful. Let's concentrate on the text part
+
+## Try to extract abstract & Keywords
+
+```{r}
+
+.extract_abstract_part <- function(text){
+  tryCatch({
+    #Find the keywords section
+    endsAt <- min( which(str_detect(text," Keywords:")))-1
+    startsAt <- max(which(str_detect(text, "@")))+1
+    text[startsAt:endsAt] %>% paste(collapse=" ")
+  }, error = function(e){NA}
+  )
+}
+
+.extract_keywords <- function(text){
+  tryCatch({
+    
+  startsAt <- min( which(str_detect(text," Keywords:")))
+  endsAt <- min(which(str_detect(text,"Journal of Educational Data Mining, Volume")))
+  text[startsAt:endsAt] %>% paste(collapse=" ") %>% str_remove("Keywords: ")
+  }, error=function(e){NA})
+}
+myFiles <- dir(here::here("data/JEDM"),full.names = TRUE)
+myData <- data.frame()
+for (fileName in myFiles){
+  cat("Processing: ",fileName,"\n")
+  myText <- pdf_text(fileName)
+## Remove breaking hyphens
+myText[1] %>% 
+  str_remove_all("-\n ") %>% 
+  str_split("\n") %>% 
+  unlist -> tmp
+  myData <- rbind(myData,
+                  data.frame(Title = str_trim(tmp[1]),
+                             Abstract = .extract_abstract_part(tmp), 
+                             Keywords = .extract_keywords(tmp)))
+  
+}
+
+myData
+```
+
+Seems to be working, now I only need to download the rest of the data.
+
+TODO: Add time and volume specs
+TODO: Add rest of text
+
