@@ -2,7 +2,7 @@
 title: "Learning Analytics"
 subtitle: "State of the Art, Trends and Future"
 author: "Aleksander Dietrichson, PhD"
-date: "9/29/2019"
+date: "10/12/2019"
 bibliography: references.bib
 output: powerpoint_presentation
 ---
@@ -11,6 +11,7 @@ output: powerpoint_presentation
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse,quietly = TRUE)
 library(ggthemes)
+library(sashaUseful)
 theme_set(theme_tufte())
 ```
 
@@ -94,9 +95,9 @@ p1
 
 # Review II
 
-1. Lack of to bring visual learning analytics tools into classroom settings
+1. Lack of visual learning analytics tools in classroom settings;
 2. Few consider background information such as demographics or prior performance;
-3. Traditional statistical visualization techniques, such as bar plots and scatter plots, are still the most commonly used in learning analytics contexts;
+3. Traditional statistical visualization techniques, such as bar plots and scatter plots still predominant in learning analytics contexts;
 4. Lack of studies that both employ sophisticated visualizations and engage deeply with educational theories.
 
 
@@ -192,13 +193,22 @@ Have we solved the problem of identifying students at risk?
 # Some trends
 
 * Push to extend to an institutional level
-* Taking LA to emerging coutries (EU funded)
+* Taking LA to emerging countries (EU funded)
 * Privacy, ethics and equity
 * Longitudinal studies
 * K-12 included
 * Taking on the task of providing data-literacy
 
 # Data Literacy
+
+* Measures of central tendency
+* Descriptive, inferential, predictive
+* Correlation is **not** causation
+* Confusion Matrix
+* Accuracy vs. Interpretability
+
+
+Too much "dumbing down" renders the analysis useless
 
 # Cognitive Bias: Causal Flow
 
@@ -237,13 +247,74 @@ p+stat_function(fun = fun.2, color="red")+
 
 # Cognitive Bias: Survival Bias
 
-# Social Network Analysis
+"Our first-year drop-out rates are sky-high compared to later years"
 
-# Linguistic Analysis
+# Bias: Procrastinationism
 
-# Learning Path Analysis
+# Bias: Procrastinationism
+
+* Study Habits
+  * "Binging" seen as negative
+  * Easy to detect, especially in an LMS (entropy)
+  * Causal link unclear (e.g. context needed)
+  * Self-reporting shows low/no correlation between perception and behavior
+  
+# On the rise: Social Network Analysis
+
+![Social Network Analysis](img/SNA.png)
 
 
+# On the rise: Linguistic Analysis
 
+![Bigram Analysis](img/bigrams.png)
+
+# On the rise: Linguistic Analysis
+
+![Sentiment Analysis](img/chatterplot1.png)
+
+# On the rise: Linguistic Analysis
+![Topic Modeling](img/timeline_wordcloud.png)
+
+# On the rise: Linguistic Analysis
+![Multidimensional Sentiment Analysis](img/multidimensional_sentiment_analysis.png)
+
+# LMS Data Standards Lagging
+
+* Caliper data collected on e.g. Discussion Posts *do not* include the actual text. 
+* Closest "Linguistic" measure is *post-length*.
+* This effectively eliminates 85% of the data (@dietrichson2013)
+
+# Example: FRES
+![Fleach Reading Ease Score](img/FRES.png)
+
+# Example: Post-length vs. FRES
+
+* FRES r-squared --> .3
+* Post-length r-squared --> .005
+
+# Example: Post-length vs. other Metrics
+
+Beating Post-length are: 
+
+* Word-count, 
+* TTR (lexical density)
+* CTC
+* even *MSS*
+
+# On the rise: Learning Path Analysis
+![Course Timeline](img/time_line_courses.png)
+
+# On the rise: Learning Path Analysis
+![Course Recommendations](img/recommended_courses.png)
+
+# On the rise: Analytics in the classroom
+![Analytics in the Classroom](img/in_classroom_analytics.png)
+
+# Aspirations for the Future
+
+* More rigor
+* Describe impact (better)
+* Research into practice
+* Generalizability
 
 # References {-}
